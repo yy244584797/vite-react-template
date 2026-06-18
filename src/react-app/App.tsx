@@ -18,6 +18,13 @@ type ConfigResponse = {
 	envName: string;
 };
 
+type ServiceLink = {
+	name: string;
+	description: string;
+	href: string;
+	category: string;
+};
+
 type ApiResponse = HealthResponse | IpResponse | ConfigResponse;
 type EndpointKey = "health" | "ip" | "config";
 
@@ -35,6 +42,33 @@ const initialResults: ApiState = {
 	ip: "尚未请求",
 	config: "尚未请求",
 };
+
+const serviceLinks: ServiceLink[] = [
+	{
+		name: "Cloudflare Dashboard",
+		description: "管理 Workers、域名、日志和 Cloudflare 资源。",
+		href: "https://dash.cloudflare.com/",
+		category: "平台",
+	},
+	{
+		name: "GitHub Repository",
+		description: "查看 Yanxin Toolbox 的源码和提交记录。",
+		href: "https://github.com/yy244584797/vite-react-template",
+		category: "代码",
+	},
+	{
+		name: "Worker Health",
+		description: "检查当前 Worker 服务是否正常响应。",
+		href: "/api/health",
+		category: "接口",
+	},
+	{
+		name: "Worker IP API",
+		description: "查看访问者 IP、地区和 User-Agent 信息。",
+		href: "/api/ip",
+		category: "接口",
+	},
+];
 
 const endpoints: EndpointConfig<ApiResponse>[] = [
 	{
@@ -59,6 +93,10 @@ const endpoints: EndpointConfig<ApiResponse>[] = [
 
 function formatJson(data: ApiResponse): string {
 	return JSON.stringify(data, null, 2);
+}
+
+function isExternalUrl(href: string): boolean {
+	return href.startsWith("https://") || href.startsWith("http://");
 }
 
 function App() {
@@ -102,6 +140,30 @@ function App() {
 				<p className="eyebrow">Cloudflare Workers + React + Vite + Hono</p>
 				<h1>Yanxin Toolbox</h1>
 				<p className="description">运行在 Cloudflare Workers 上的个人工具站</p>
+			</section>
+
+			<section className="service-section" aria-labelledby="service-title">
+				<div className="section-heading">
+					<h2 id="service-title">常用服务入口</h2>
+				</div>
+				<div className="service-grid">
+					{serviceLinks.map((service) => (
+						<article className="service-card" key={service.name}>
+							<div>
+								<span className="service-category">{service.category}</span>
+								<h3>{service.name}</h3>
+								<p>{service.description}</p>
+							</div>
+							<a
+								href={service.href}
+								target={isExternalUrl(service.href) ? "_blank" : undefined}
+								rel={isExternalUrl(service.href) ? "noreferrer" : undefined}
+							>
+								打开
+							</a>
+						</article>
+					))}
+				</div>
 			</section>
 
 			<section className="tools" aria-label="工具接口">
