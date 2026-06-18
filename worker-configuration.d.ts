@@ -6,6 +6,8 @@ declare namespace Cloudflare {
 		mainModule: typeof import("./src/worker/index");
 	}
 	interface Env {
+		APP_NAME: "Yanxin Toolbox";
+		ENV_NAME: "production";
 	}
 }
 interface Env extends Cloudflare.Env {}
