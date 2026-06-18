@@ -1,45 +1,101 @@
 #root {
-	max-width: 1280px;
+	width: 100%;
+}
+
+.toolbox {
+	box-sizing: border-box;
+	width: min(960px, 100%);
+	min-height: 100vh;
 	margin: 0 auto;
-	padding: 2rem;
+	padding: 56px 24px;
+	color: #172033;
+}
+
+.hero {
+	margin-bottom: 32px;
 	text-align: center;
 }
 
-.logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
-	transition: filter 300ms;
-}
-.logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-	filter: drop-shadow(0 0 2em #61dafbaa);
-}
-.logo.cloudflare:hover {
-	filter: drop-shadow(0 0 2em #f6821faa);
+.eyebrow {
+	margin: 0 0 12px;
+	color: #4d607a;
+	font-size: 0.92rem;
 }
 
-@keyframes logo-spin {
-	from {
-		transform: rotate(0deg);
+.hero h1 {
+	margin: 0;
+	font-size: clamp(2.2rem, 6vw, 4rem);
+	line-height: 1.05;
+}
+
+.description {
+	margin: 16px auto 0;
+	max-width: 520px;
+	color: #4d607a;
+	font-size: 1.08rem;
+}
+
+.tools {
+	display: grid;
+	gap: 16px;
+}
+
+.tool-panel {
+	display: grid;
+	gap: 12px;
+	padding: 18px;
+	border: 1px solid #dbe3ef;
+	border-radius: 8px;
+	background: #ffffff;
+	box-shadow: 0 10px 32px rgba(23, 32, 51, 0.08);
+}
+
+.tool-panel button {
+	justify-self: start;
+	border: 0;
+	border-radius: 8px;
+	padding: 10px 14px;
+	color: #ffffff;
+	background: #2254d6;
+	font: inherit;
+	font-weight: 650;
+	cursor: pointer;
+}
+
+.tool-panel button:hover {
+	background: #1c46b5;
+}
+
+.tool-panel button:disabled {
+	cursor: wait;
+	opacity: 0.72;
+}
+
+.tool-panel pre {
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 96px;
+	margin: 0;
+	overflow-x: auto;
+	border-radius: 8px;
+	padding: 14px;
+	color: #e9eef8;
+	background: #111827;
+	text-align: left;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+@media (max-width: 640px) {
+	.toolbox {
+		padding: 36px 16px;
 	}
-	to {
-		transform: rotate(360deg);
+
+	.tool-panel {
+		padding: 14px;
 	}
-}
 
-@media (prefers-reduced-motion: no-preference) {
-	a:nth-of-type(2) .logo {
-		animation: logo-spin infinite 20s linear;
+	.tool-panel button {
+		width: 100%;
 	}
-}
-
-.card {
-	padding: 2em;
-}
-
-.read-the-docs {
-	color: #888;
 }
